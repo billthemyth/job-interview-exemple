@@ -1,0 +1,1 @@
+# ts-properties-test
