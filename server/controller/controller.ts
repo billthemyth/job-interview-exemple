@@ -14,7 +14,20 @@ export class ControllerHandler {
         return this.rootPath + this.entityName + this.extensionFile
     }
 
-    public select_entity() : Array<PersonEntity|PropertyEntity|UserEntity> {
+    // This function grant the id is unique
+    private handle_unique_entity(id : string, fn : Function ){
+        const entity    = this.select_entity()
+        let filtered  = entity.filter(en => id == en.id )
+        if(filtered.length == 0 ) {
+            throw Error("id dont exists!")
+        } else if (filtered.length == 1 ) {
+            fn()
+        } else {
+            throw Error("id is not unique")
+        }
+    }
+    
+    public select_entity() : Array<any>  {
         return JSON.parse(fs.readFileSync( this.filePath , "utf8").toString())
     }
 
@@ -27,19 +40,6 @@ export class ControllerHandler {
         }
         entity.push(ent)
         fs.writeFileSync(this.filePath, JSON.stringify(entity), callback())
-    }
-
-    // This function grant the id is unique
-    private handle_unique_entity(id : string, fn : Function ){
-        const entity    = this.select_entity()
-        let filtered  = entity.filter(en => id == en.id )
-        if(filtered.length == 0 ) {
-            throw Error("id dont exists!")
-        } else if (filtered.length == 1 ) {
-            fn()
-        } else {
-            throw Error("id is not unique")
-        }
     }
 
     public update_entity(id : string, ent : PersonEntity|PropertyEntity|UserEntity, callback : Function ){
