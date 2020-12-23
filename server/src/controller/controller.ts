@@ -6,7 +6,7 @@ import  {   UserEntity      }   from    "../entities/user.entity"
 
 export class ControllerHandler {
     
-    private rootPath            = "./controller/data/"
+    private rootPath            = "./src/controller/data/"
     private extensionFile       = ".json"
     protected entityName        = "entity"
 
@@ -31,24 +31,34 @@ export class ControllerHandler {
         return JSON.parse(fs.readFileSync( this.filePath , "utf8").toString())
     }
 
+    public select_entity_one(id : string) : any {
+        const entity    = this.select_entity()
+        let filtered    = entity.filter( en => id == en.id )
+        
+        return filtered[0]
+    }
+
     public insert_entity( ent : PersonEntity|PropertyEntity|UserEntity, callback : Function){
         let entity : Array<PersonEntity|PropertyEntity|UserEntity>
         try {
             entity = this.select_entity()
         } catch (error) {
-            entity = []
+            entity = [] 
         }
         entity.push(ent)
         fs.writeFileSync(this.filePath, JSON.stringify(entity), callback())
     }
 
-    public update_entity(id : string, ent : PersonEntity|PropertyEntity|UserEntity, callback : Function ){
+    public update_entity(id : string, ent : any, callback : Function ){
         this.handle_unique_entity(id, ()=>{
-            const entity    = this.select_entity()
-            let filtered    = entity.filter( en => id != en.id )
-            ent.id          = id
-            filtered.push(ent)
-            fs.writeFileSync(this.filePath, JSON.stringify(filtered), callback())
+            const entity            = this.select_entity()
+            let specific_entity   = this.select_entity_one(id)[0]
+            let filtered            = entity.filter( en => id != en.id )
+            ent.id                  = id
+            specific_entity = Object.assign(ent, specific_entity )
+            filtered.push(specific_entity)
+            console.log(specific_entity);
+            // fs.writeFileSync(this.filePath, JSON.stringify(filtered), callback())
         })
     }
 

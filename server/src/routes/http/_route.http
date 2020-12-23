@@ -1,0 +1,46 @@
+
+GET http://localhost:5000 HTTP/1.1 
+Content-Type: application/json
+
+###
+POST http://localhost:5000/person/insert_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "name"      : "Jose",
+    "lastName"  : "Silvado",
+    "cpf"       : "1234567899",
+    "perfil"      : "Admin"
+}
+###
+
+###
+POST http://localhost:5000/person/insert_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "name"      : "Carlos",
+    "lastName"  : "Moises",
+    "cpf"       : "54353903314",
+    "perfil"      : "Admin"
+}
+
+###
+GET http://localhost:5000/person/select_entity HTTP/1.1 
+Content-Type: application/json
+
+###
+GET http://localhost:5000/person/select_entity_one/67671dee-c5d5-4891-8e2a-f770c7fbce72 HTTP/1.1 
+Content-Type: application/json
+
+###
+GET http://localhost:5000/person/deactivate_entity/67671dee-c5d5-4891-8e2a-f770c7fbce72 HTTP/1.1 
+Content-Type: application/json
+
+###
+GET http://localhost:5000/person/update_entity/d56af2f0-b5dc-4456-9720-494b16010349 HTTP/1.1 
+Content-Type: application/json
+
+{
+    "name"      : "Carlos",
+}

@@ -13,14 +13,13 @@ test('test all function in PersonController',  () => {
                                             "any_cpf_number",   "admin",    undefined, 
                                             undefined,          undefined 
                                             );
-    
     // Insert       (OK)
     // Deactivate   (OK)
     // Delete       (OK)
     // Update       (OK)  
 
     controller.insert_entity(entity,()=>{})
-    
+
     expect(controller.select_entity().length).toEqual(1)
     expect(controller.select_entity()[0].name).toEqual("Julio")
 
@@ -34,8 +33,6 @@ test('test all function in PersonController',  () => {
     expect(controller.select_entity()[0].name).toEqual(entity.name)
 
     controller.delete_entity(entity.id ? entity.id : "any_invalid_id", ()=>{})
-
-
 });
 
 test('test all function in PropertyController',  () => {
@@ -46,19 +43,19 @@ test('test all function in PropertyController',  () => {
                                                 "any_cpf_number",   "admin",        undefined, 
                                                 undefined,          undefined 
                                             )
-                                            
+
     const entity        = new PropertyEntity(
                                                 undefined,          entity_person,  "Bareu", 
                                                 undefined,          undefined,      undefined
                                             )
-    
+
     // Insert       (OK)
     // Deactivate   (OK)
     // Delete       (OK)
     // Update       (OK)  
 
     controller.insert_entity(entity,()=>{})
-    
+
     expect(controller.select_entity().length).toEqual(1)
     expect(controller.select_entity()[0].name).toEqual("Bareu")
 
@@ -66,14 +63,12 @@ test('test all function in PropertyController',  () => {
 
     controller.deactivate_entity( entity.id ? entity.id : "any_invalid_id" , ()=>{})
     controller.update_entity( entity.id ? entity.id : "any_invalid_id" , entity , ()=>{})
-    
+
     expect(controller.select_entity()[0].name).toEqual("Jose")    
     expect(controller.select_entity()[0].deactivated_at).not.toBeNull()
     expect(controller.select_entity()[0].name).toEqual(entity.name)
 
     controller.delete_entity(entity.id ? entity.id : "any_invalid_id", ()=>{})
-
-
 });
 
 test('test all function in UserController',  () => {
@@ -84,14 +79,13 @@ test('test all function in UserController',  () => {
                                                 "any_cpf_number",   "admin",        undefined, 
                                                 undefined,          undefined 
                                             )
-                                            
+
     const entity        = new UserEntity(
                                              undefined,             entity_person,  "julio@mail.com",
                                              "dj32ij423o",          undefined,      undefined, 
                                              undefined
                                         )
-                                        
-    
+
     // Insert       (OK)
     // Deactivate   (OK)
     // Delete       (OK)
@@ -112,6 +106,4 @@ test('test all function in UserController',  () => {
     expect(controller.select_entity()[0].login).toEqual(entity.login)
 
     controller.delete_entity(entity.id ? entity.id : "any_invalid_id", ()=>{})
-
-
 });
