@@ -17,6 +17,5 @@ export class PersonEntity extends Entity {
                     this.lastName       = lastName
                     this.cpf            = cpf
                     this.perfil         = perfil
-    }
-
+                }
 }
