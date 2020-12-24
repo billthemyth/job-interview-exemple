@@ -29,7 +29,7 @@ Content-Type: application/json
     "name"      : "Carlos",
     "lastName"  : "Moises",
     "cpf"       : "54353903314",
-    "perfil"      : "Admin"
+    "profile"      : "Admin"
 }
 
 ###

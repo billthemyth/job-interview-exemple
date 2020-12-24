@@ -37,13 +37,13 @@ router.post (`${routeRootPath}/insert_entity`,
 
                 try {
 
-                    if( !req.body.name || !req.body.lastName || !req.body.cpf || !req.body.perfil){
+                    if( !req.body.name || !req.body.lastName || !req.body.cpf || !req.body.profile){
                         throw new Error("Missing fields!")
                     }
 
                     const person = new PersonEntity(
                         undefined,          req.body.name,      req.body.lastName,
-                        req.body.cpf,       req.body.perfil,    undefined,
+                        req.body.profile,   req.body.cpf,       undefined,
                         undefined,          undefined
                     );
 
@@ -86,7 +86,7 @@ router.post (`${routeRootPath}/update_entity`,
                         req.body.name ? req.body.name : entities[0].name,
                         req.body.lastName ? req.body.lastName : entities[0].lastName,
                         req.body.cpf ? req.body.cpf : entities[0].cpf,
-                        req.body.perfil ? req.body.perfil : entities[0].perfil,
+                        req.body.profile ? req.body.profile : entities[0].profile,
                         entities[0].created_at,
                         new Date,
                         req.body.deactivated_at ? req.body.deactivated_at : entities[0].deactivated_at

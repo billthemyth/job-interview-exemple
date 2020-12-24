@@ -7,8 +7,8 @@ POST http://localhost:5000/property/insert_entity HTTP/1.1
 Content-Type: application/json
 
 {
-    "name"      : "Jose",
-    "owner_id"  : "449d0591-fe7c-4649-8ca7-bdfa26e0e3c4"
+    "name"      : "Fazenda emirados",
+    "owner_id"  : "b69cfafe-0d74-4809-98e2-e41274a52cbb"
 }
 
 ### INSERT ENTITY B
@@ -19,7 +19,7 @@ Content-Type: application/json
     "name"      : "Carlos",
     "lastName"  : "Moises",
     "cpf"       : "54353903314",
-    "perfil"      : "Admin"
+    "profile"      : "Admin"
 }
 
 ### SELECT ENTITY

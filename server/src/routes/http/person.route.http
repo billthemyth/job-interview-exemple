@@ -10,7 +10,7 @@ Content-Type: application/json
     "name"      : "Jose",
     "lastName"  : "Silvado",
     "cpf"       : "1234567899",
-    "perfil"      : "Admin"
+    "profile"   : "technician"
 }
 
 ### INSERT ENTITY B
@@ -21,7 +21,7 @@ Content-Type: application/json
     "name"      : "Carlos",
     "lastName"  : "Moises",
     "cpf"       : "54353903314",
-    "perfil"      : "Admin"
+    "profile"      : "Admin"
 }
 
 ###
