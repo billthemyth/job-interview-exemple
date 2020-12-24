@@ -12,14 +12,15 @@ const router        : Router            = Router()
 const controller    : PersonController  = new PersonController()
 
 router.all  ( `${routeRootPath}`,
-            (   req: Request, 
+            (   
+                _req: Request, 
                 res: Response, 
                 next: NextFunction 
             )=>{
                 log(`GET ${routeRootPath}`, "ROUTE")
                 res.send({ 
-                    "entity" : "person",
-                    "about" : `Is a route for CRUD operation for ${entityName}`
+                    "entity" : entityName,
+                    "about" : `Is a route for CRUD operation for ${entityName}s`
                 })
                 res.end()
                 next()
@@ -27,13 +28,19 @@ router.all  ( `${routeRootPath}`,
             )
 
 router.post (`${routeRootPath}/insert_entity`,
-            (   req: Request, 
+            (   
+                req: Request, 
                 res: Response, 
                 next: NextFunction 
             )=>{
                 log(`POST ${routeRootPath}/insert_entity`, "ROUTE")
 
                 try {
+
+                    if( !req.body.name || !req.body.lastName || !req.body.cpf || !req.body.perfil){
+                        throw new Error("Missing fields!")
+                    }
+
                     const person = new PersonEntity(
                         undefined,          req.body.name,      req.body.lastName,
                         req.body.cpf,       req.body.perfil,    undefined,
@@ -41,74 +48,61 @@ router.post (`${routeRootPath}/insert_entity`,
                     );
 
                     controller.insert_entity(person, ()=>{
-                        log("Person Inserted", "DB")
+                        log(`${entityName} inserted`, "DB")
                     })
                     res.send({ status : "SUCCESS", message : `${entityName} selected with succcess!`})
-                    res.end()
-
                 } catch (error) {
                     res.send({ status : "FAIL", message : "invalid data", error })
-                    res.end()
                 } 
-                }
-            )
-// NT
-router.get (`${routeRootPath}/deactivate_entity/:id`,
-            (   req: Request, 
-                res: Response, 
-                next: NextFunction 
-            )=>{
-                log(`POST ${routeRootPath}/deactivate_entity`, "ROUTE")
-
-                try {
-
-                    if(!controller.select_entity_one(req.params.id)){
-                        throw Error("ID dont exists!")
-                    }
-
-                    controller.deactivate_entity(req.params.id, ()=>{
-                        log(`${entityName} entity deactivated`, "DB")
-                    })
-                    
-                    res.send({ status : "SUCCESS", message : `${entityName} deactivated with succcess!`})
-                    res.end()
-
-                } catch (error) {
-                    res.send({ status : "FAIL", message : "invalid data", error })
-                    res.end()
-                } 
+                res.end()
+                next()
                 }
             )
 
-router.post (`${routeRootPath}/update_entity`, 
-            (   req: Request, 
+router.post (`${routeRootPath}/update_entity`,
+            (
+                req: Request, 
                 res: Response, 
                 next: NextFunction 
-            )=>{                
+            )=>{             
+                
                 log(`POST ${routeRootPath}/update_entity`, "ROUTE")
 
                 try {
+
+                    if(!req.body.id){
+                        throw Error("ID dont sended")
+                    }
+
+                    const entities = controller.select_entity_one(req.body.id)
                     
-                    if(!controller.select_entity_one(req.params.id)){
+                    if(entities.length == 0 ){                        
                         throw Error("ID dont exists!")
                     }
 
-                    const person = new PersonEntity(
-                        undefined,          req.body.name,      req.body.lastName,
-                        req.body.cpf,       req.body.perfil,    undefined,
-                        undefined,          undefined
-                    );
 
-                    // controller.update_entity( req.body.id, person, ()=>{
-                    //     log("Person Updated", "DB")
-                    // })
+                    const person = new PersonEntity(
+                        req.body.id,
+                        req.body.name ? req.body.name : entities[0].name,
+                        req.body.lastName ? req.body.lastName : entities[0].lastName,
+                        req.body.cpf ? req.body.cpf : entities[0].cpf,
+                        req.body.perfil ? req.body.perfil : entities[0].perfil,
+                        entities[0].created_at,
+                        new Date,
+                        req.body.deactivated_at ? req.body.deactivated_at : entities[0].deactivated_at
+                    )
+                    
+                    controller.update_entity(person.id + "", person, ()=>{
+                        log(`entity ${entityName} updated`, 'DB')
+                    })
+    
                     res.send({ status : "SUCCESS", message : `${entityName} updated with succcess!`})
-                    res.end()
 
                 } catch (error) {
                     res.send({ status : "FAIL", message : "invalid data", error })
-                    res.end()
-                } 
+                }
+                res.end()
+                next()
                 }
             )
 
@@ -116,7 +110,7 @@ router.get  (`${routeRootPath}/select_entity`,
             (   req: Request, 
                 res: Response, 
                 next: NextFunction 
-            )=>{                
+            )=>{         
                 log(`POST ${routeRootPath}/select_entity`, "ROUTE")
                 try {
                     res.send({  
@@ -124,12 +118,12 @@ router.get  (`${routeRootPath}/select_entity`,
                                 message : `${entityName} selected with succcess!`, 
                                 result  : controller.select_entity()
                             })
-                    res.end()
 
                 } catch (error) {
                     res.send({ status : "FAIL", message : "Server with problem", error })
-                    res.end()
-                } 
+                }
+                res.end()
+                next()
                 }
             )
             
@@ -138,20 +132,25 @@ router.get (`${routeRootPath}/select_entity_one/:id`,
                 res: Response, 
                 next: NextFunction 
             )=>{                
-                log(`POST ${routeRootPath}/select_entity_one`, "ROUTE")
+                log(`GET ${routeRootPath}/select_entity_one/:id`, "ROUTE")
                 try {
+
+                    if(controller.select_entity_one(req.params.id).length == 0 ){
+                        throw Error("ID dont exists!")
+                    }
+
                     res.send({  
                                 status  : "SUCCESS", 
                                 message : `${entityName} selected with succcess!`, 
-                                result  : controller.select_entity_one(req.params.id ? req.params.id.toString() : "")
+                                result  : controller.select_entity_one(req.params.id ? req.params.id.toString() : "")[0]
                             })
-
-                    res.end()
 
                 } catch (error) {
                     res.send({ status : "FAIL", message : "Server with problem", error })
                     res.end()
-                } 
+                }
+                res.end()
+                next()
                 }
             )
 

@@ -5,4 +5,5 @@ export class PersonController extends ControllerHandler {
         super()
         this.entityName = "person"
     }
+
 }

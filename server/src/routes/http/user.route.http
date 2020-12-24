@@ -1,0 +1,50 @@
+### GET INFO
+GET http://localhost:5000/user HTTP/1.1
+Content-Type: application/json
+
+### INSERT ENTITY A
+POST http://localhost:5000/user/insert_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "login"     : "jose@morgado.com",
+    "person_id" : "7d39b354-1140-4892-ac70-908fa91fe139",
+    "password"  : "hooper@121024"
+}
+
+###
+POST http://localhost:5000/user/auth HTTP/1.1
+Content-Type: application/json
+
+{
+    "login"     : "jose@morgado.com",
+    "password"  : "hooper@121024"
+}
+
+### INSERT ENTITY B
+POST http://localhost:5000/user/insert_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "name"      : "Carlos",
+    "lastName"  : "Moises",
+    "cpf"       : "54353903314",
+    "perfil"      : "Admin"
+}
+
+###
+GET http://localhost:5000/user/select_entity HTTP/1.1 
+Content-Type: application/json
+
+### SELECT ENTITY ONE
+GET http://localhost:5000/user/select_entity_one/4c21a2d5-6b0d-4a3a-ac98-717ed9ed3daf HTTP/1.1 
+Content-Type: application/json
+
+### UPDATE
+POST http://localhost:5000/user/update_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "id"        : "4c21a2d5-6b0d-4a3a-ac98-717ed9ed3daf",
+    "lastName"  : "Morgado"
+}

@@ -1,0 +1,40 @@
+### GET INFO
+GET http://localhost:5000/property HTTP/1.1
+Content-Type: application/json
+
+### INSERT ENTITY A
+POST http://localhost:5000/property/insert_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "name"      : "Jose",
+    "owner_id"  : "449d0591-fe7c-4649-8ca7-bdfa26e0e3c4"
+}
+
+### INSERT ENTITY B
+POST http://localhost:5000/property/insert_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "name"      : "Carlos",
+    "lastName"  : "Moises",
+    "cpf"       : "54353903314",
+    "perfil"      : "Admin"
+}
+
+### SELECT ENTITY
+GET http://localhost:5000/property/select_entity HTTP/1.1 
+Content-Type: application/json
+
+### SELECT ENTITY ONE
+GET http://localhost:5000/property/select_entity_one/36e755ae-4990-4686-9ea5-76cdf6539659 HTTP/1.1 
+Content-Type: application/json
+
+### UPDATE
+POST http://localhost:5000/property/update_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "id"        : "36e755ae-4990-4686-9ea5-76cdf6539659",
+    "name"      : " Hooper"
+}

@@ -31,11 +31,11 @@ export class ControllerHandler {
         return JSON.parse(fs.readFileSync( this.filePath , "utf8").toString())
     }
 
-    public select_entity_one(id : string) : any {
+    public select_entity_one(id : string) : Array<any> {
         const entity    = this.select_entity()
         let filtered    = entity.filter( en => id == en.id )
         
-        return filtered[0]
+        return filtered
     }
 
     public insert_entity( ent : PersonEntity|PropertyEntity|UserEntity, callback : Function){
@@ -52,13 +52,9 @@ export class ControllerHandler {
     public update_entity(id : string, ent : any, callback : Function ){
         this.handle_unique_entity(id, ()=>{
             const entity            = this.select_entity()
-            let specific_entity   = this.select_entity_one(id)[0]
             let filtered            = entity.filter( en => id != en.id )
-            ent.id                  = id
-            specific_entity = Object.assign(ent, specific_entity )
-            filtered.push(specific_entity)
-            console.log(specific_entity);
-            // fs.writeFileSync(this.filePath, JSON.stringify(filtered), callback())
+            filtered.push(ent)
+            fs.writeFileSync(this.filePath, JSON.stringify(filtered), callback())
         })
     }
 
