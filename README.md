@@ -12,3 +12,7 @@
 - Tela de login responsivo (🤧)
 - Crud das entidades (👌)
 - Página com contadores informando quantidade de técnicos, produtores e propriedade; (👌)
+
+
+# Guide to run
+Inside the both project ( server / frontend ) just run npm start
