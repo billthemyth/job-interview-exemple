@@ -1,0 +1,16 @@
+<div class="box">
+      <!-- <form class="register-form">
+        <input type="text" placeholder="name"/>
+        <input type="password" placeholder="password"/>
+        <input type="text" placeholder="email address"/>
+        <button>create</button>
+        <p class="message">Already registered? <a href="#">Sign In</a></p>
+      </form> -->
+    <form class="login-form" action="" id="loginForm" [formGroup]="loginForm" (ngSubmit)="submit()">
+      <input type="email" name="email" placeholder="email" formControlName="email"/>
+      <input type="text" name="password" placeholder="password" formControlName="password"/>
+      
+      <button>login</button>
+        <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+    </form>
+</div>

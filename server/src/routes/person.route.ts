@@ -79,8 +79,7 @@ router.post (`${routeRootPath}/update_entity`,
                     if(entities.length == 0 ){                        
                         throw Error("ID dont exists!")
                     }
-
-
+                    
                     const person = new PersonEntity(
                         req.body.id,
                         req.body.name ? req.body.name : entities[0].name,
@@ -91,7 +90,6 @@ router.post (`${routeRootPath}/update_entity`,
                         new Date,
                         req.body.deactivated_at ? req.body.deactivated_at : entities[0].deactivated_at
                     )
-                    
                     controller.update_entity(person.id + "", person, ()=>{
                         log(`entity ${entityName} updated`, 'DB')
                     })
@@ -116,7 +114,7 @@ router.get  (`${routeRootPath}/select_entity`,
                     res.send({  
                                 status  : "SUCCESS", 
                                 message : `${entityName} selected with succcess!`, 
-                                result  : controller.select_entity()
+                                result  : controller.select_entity().filter( en => !en.deactivated_at )
                             })
 
                 } catch (error) {

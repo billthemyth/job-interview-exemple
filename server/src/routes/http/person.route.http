@@ -21,7 +21,7 @@ Content-Type: application/json
     "name"      : "Carlos",
     "lastName"  : "Moises",
     "cpf"       : "54353903314",
-    "profile"      : "Admin"
+    "profile"   : "producer"
 }
 
 ###
@@ -29,7 +29,7 @@ GET http://localhost:5000/person/select_entity HTTP/1.1
 Content-Type: application/json
 
 ### SELECT ENTITY ONE
-GET http://localhost:5000/person/select_entity_one/b0784a33-c5f8-43b1-89aa-d8ad524f3e44 HTTP/1.1 
+GET http://localhost:5000/person/select_entity_one/4bb767be-1e3b-4c08-9686-5b28d8813632 HTTP/1.1 
 Content-Type: application/json
 
 ### UPDATE
@@ -37,6 +37,16 @@ POST http://localhost:5000/person/update_entity HTTP/1.1
 Content-Type: application/json
 
 {
-    "id"      : "b0784a33-c5f8-43b1-89aa-d8ad524f3e44",
-    "name"    : "Morgado"
+    "id"                : "6a551246-2590-405c-b42e-b51ca0844b91",
+    "name"              : "Morgado"
 }
+
+### DEACTIVATE
+POST http://localhost:5000/person/deactivate_entity HTTP/1.1
+Content-Type: application/json
+
+{
+    "id"                : "64fd0aeb-5bf7-4f34-ae68-c90d630cc7dc",
+    "deactivated_at"    : "2020-12-25T18:52:13.737Z"
+}
+

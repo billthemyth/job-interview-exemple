@@ -18,9 +18,15 @@ export class PropertyEntity extends Entity {
 
                     const owner = person_controller.select_entity_one(this.ownerID)
                     
+                    
                     if(owner.length == 0){
                         throw new Error("Person dont exists!")
                     }
+
+                    if(owner[0].profile != 'producer' ){
+                        throw new Error("Person should be a producer!")
+                    }
+                    
                     this.owner = owner[0]
                     
                     this.name   = name

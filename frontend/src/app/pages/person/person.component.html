@@ -1,0 +1,53 @@
+<div class="box main">
+    
+    <h1>Choose an operation</h1>
+
+    <h3 *ngIf="account"> Has {{ account.producer }}  producers,  {{ account.technician}} technician and  {{ account.administrator }} administrator as person here.</h3>
+
+    <button (click)="select_entity()" *ngIf="stateOfPage=='default'  || stateOfPage=='list'"  > List Operation </button>
+    
+    <div class="table" *ngIf="stateOfPage=='list'" >
+        <table>
+            <tr>
+                <th></th>
+                <th *ngFor="let header of headers">{{ header }}</th>
+            </tr>
+              <tr *ngFor="let person of people">
+                <td style="padding : 10px" ><button   (click)="update_entity(person.id)"> Edit </button></td>
+                <td>{{ person.cpf       }}</td>
+                <td>{{ person.name      }}</td>
+                <td>{{ person.lastName  }}</td>
+                <td>{{ person.profile   }}</td>
+              </tr>
+        </table>
+    </div>
+
+    <button  *ngIf="stateOfPage=='default' || stateOfPage=='insert'" (click)="insert_entity()"> Insert Operation  </button>
+    <div class="box"  *ngIf="stateOfPage=='insert' || stateOfPage=='update'" >
+        <form class="user-form" action="" id="userForm" [formGroup]="userForm">
+
+            <input type="text" name="cpf"       placeholder="cpf"       formControlName="CPF"/>
+            <input type="text" name="name"      placeholder="name"      formControlName="Name"/>
+            <input type="text" name="lastName"  placeholder="lastName"  formControlName="LastName"/>
+            <select  formControlName="Profile" >
+                <option ngValue="" select disabled hidden>Select the profile </option>
+                <option ngValue="producer"      >Producer</option>
+                <option ngValue="technician"    >Technician</option>
+                <option ngValue="administrator" >Administrator</option>
+            </select>
+       
+            <button [disabled]="!userForm.valid"    *ngIf="stateOfPage=='insert'" (click)="insert_entity()"     >Insert</button>
+            <button [disabled]="!userForm.valid"    *ngIf="stateOfPage=='update'" (click)="update_entity()"     >Update</button>
+            <button                                 *ngIf="stateOfPage=='update'" (click)="deactivate_entity()" >Deactivate</button>
+            <button                                 *ngIf="stateOfPage=='update'" (click)="cancel_update()"     >Cancel</button>
+
+        </form>
+
+
+
+    </div>
+
+    <button routerLink="/"  *ngIf="stateOfPage=='default'"> Back to homepage </button>
+
+    
+</div>

@@ -9,7 +9,7 @@ export class PersonEntity extends Entity {
 
     constructor(
                 id          : string|undefined, name            : string,
-                lastName: string,               profile         : "producer"    | "technician"  | "administrator",
+                lastName    : string,           profile         : "producer"    | "technician"  | "administrator",
                 cpf         : string,           created_at      : Date          | undefined, 
                 updated_at  : Date | undefined, deactivated_at  : Date          | undefined 
                 ){
@@ -17,7 +17,7 @@ export class PersonEntity extends Entity {
                     this.name           = name
                     this.lastName       = lastName
                     this.cpf            = cpf
-                    if( profile != "producer" && profile != "technician"  && profile != "administrator" ) throw new Error ("Profile inderteminated of forbbiden")
+                    if( profile != "producer" && profile != "technician"  && profile != "administrator" ) console.log("erijerjeirjei")
                     this.profile        = profile
                 }
-}
+                                            }                         

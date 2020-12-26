@@ -112,7 +112,7 @@ router.get  (`${routeRootPath}/select_entity`,
             res.send({  
                         status  : "SUCCESS", 
                         message : `${entityName} selected with succcess!`, 
-                        result  : controller.select_entity()
+                        result  : controller.select_entity().filter( en => !en.deactivated_at )
                     })
 
         } catch (error) {

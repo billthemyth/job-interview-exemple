@@ -83,7 +83,7 @@ router.post (`${routeRootPath}/update_entity`,
                     
                     const user = new UserEntity(
                         req.body.id,
-                        entities[0].personID,
+                        req.body.person_id ? req.body.person_id : entities[0].personID,
                         req.body.login ? req.body.login : entities[0].login,
                         req.body.password ? req.body.password : entities[0].password,
                         entities[0].created_at,
@@ -115,7 +115,7 @@ router.get  (`${routeRootPath}/select_entity`,
                 res.send({  
                             status  : "SUCCESS", 
                             message : `${entityName} selected with succcess!`, 
-                            result  : controller.select_entity()
+                            result  : controller.select_entity().filter( en => !en.deactivated_at )
                         })
 
             } catch (error) {

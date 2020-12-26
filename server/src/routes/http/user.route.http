@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
     "login"     : "jose@morgado.com",
-    "person_id" : "7d39b354-1140-4892-ac70-908fa91fe139",
+    "person_id" : "1d2a8e35-47f9-4e9d-9b00-0dc3b0e6fad2",
     "password"  : "hooper@121024"
 }
 
@@ -46,5 +46,5 @@ Content-Type: application/json
 
 {
     "id"        : "4c21a2d5-6b0d-4a3a-ac98-717ed9ed3daf",
-    "lastName"  : "Morgado"
+    "person_id"  : "Morgado"
 }
