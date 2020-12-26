@@ -17,10 +17,11 @@
   "devDependencies": {
     "@types/jest": "^26.0.19",
     "@types/uuid": "^8.3.0",
-    "ts-jest": "^26.4.4"
+    "ts-jest": "^26.4.4",
+    "ts-node": "~8.3.0"
   },
   "scripts": {
-    "start:dev": "ts-node ./src/main",
+    "start": "node ./node_modules/ts-node/dist/bin ./src/main",
     "test": "jest"
   },
   "jest": {
