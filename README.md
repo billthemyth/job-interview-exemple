@@ -9,9 +9,9 @@
 - Autenticação simples (👌)
 
 # Requirements for Frontend 😎
-- Tela de login responsivo (❌)
-- Crud das entidades (❌)
-- Página com contadores informando quantidade de técnicos, produtores e propriedade; (❌)
+- Tela de login responsivo (🤧)
+- Crud das entidades (👌)
+- Página com contadores informando quantidade de técnicos, produtores e propriedade; (👌)
 
 # Observacoes
 -
