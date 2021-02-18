@@ -1,6 +1,6 @@
-# ts-properties-test
+# Teste Fullstack Dev Junior
 
-Esse exemplo, e um teste para desenvolver um projeto com dois software. 
+Esse exemplo, e um teste para desenvolver um projeto com dois software.  
 
 Deixei esse codigo imperfeito e parcialmente completo, para que inspirem jovens gafanhoto programadores. Lembre que esse codigo e datado em 2020.
 
@@ -29,6 +29,8 @@ Deixei esse codigo imperfeito e parcialmente completo, para que inspirem jovens 
 # Observacoes sobre desempenho ao desenvolver
 
 Para backend, desenvolvi impecavelmente. Ja que normalmente tenho facilidade nesse tipo de desenvolvimento. No frontend realmente pequei. 
+
+Lembrando que tive 9 dias para desenvolver-lo. Acredito que tenho levado mais dias que deveria, mas estamos sempre aprendendo nao e amigao/ona ?
 
 # Guide to run
 Inside the both project ( server / frontend ) just run npm start
